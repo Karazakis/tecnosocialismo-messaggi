@@ -1,12 +1,5 @@
-import { NextResponse } from "next/server";
-import { ensureSchema, pool } from "@/db";
+import { proxyRequest } from "@/lib/proxy";
 
-export async function GET() {
-  try {
-    await ensureSchema();
-    await pool.query("SELECT 1");
-    return NextResponse.json({ ok: true, service: "messaggi" });
-  } catch {
-    return NextResponse.json({ ok: false, service: "messaggi" }, { status: 503 });
-  }
+export async function GET(request: Request) {
+  return proxyRequest(request, "/api/messages/health");
 }

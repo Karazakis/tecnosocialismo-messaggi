@@ -1,16 +1,6 @@
-import { NextResponse } from "next/server";
-import { getSuiteUser } from "@/lib/auth";
-import { markConversationRead, MessageError } from "@/lib/messages";
+import { proxyRequest } from "@/lib/proxy";
 
 export async function POST(request: Request, context: { params: Promise<{ id: string }> }) {
-  const user = await getSuiteUser(request.headers);
-  if (!user) return NextResponse.json({ error: "Accesso richiesto." }, { status: 401 });
   const { id } = await context.params;
-  try {
-    await markConversationRead(id, user.id);
-    return NextResponse.json({ ok: true });
-  } catch (error) {
-    if (error instanceof MessageError) return NextResponse.json({ error: error.message }, { status: error.status });
-    return NextResponse.json({ error: "Lettura non aggiornata." }, { status: 500 });
-  }
+  return proxyRequest(request, `/api/messages/conversations/${encodeURIComponent(id)}/read`);
 }
