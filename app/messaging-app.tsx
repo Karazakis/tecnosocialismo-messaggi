@@ -9,19 +9,20 @@ const ORIGIN = "https://messaggi.tecnosocialismo.com";
 const LOGIN_URL = `https://login.tecnosocialismo.com?returnTo=${encodeURIComponent(ORIGIN)}`;
 const suiteLinks = [
   { mark: "T", label: "Home", href: "https://tecnosocialismo.com" },
-  { mark: "I", label: "Iskra", href: "https://iskra.tecnosocialismo.com" },
   { mark: "R", label: "Rizoma", href: "https://rizoma.tecnosocialismo.com" },
+  { mark: "I", label: "Iskra", href: "https://iskra.tecnosocialismo.com" },
   { mark: "C", label: "Cloud", href: "https://cloud.tecnosocialismo.com" },
   { mark: "M", label: "Mail", href: "https://mail.tecnosocialismo.com" },
   { mark: "V", label: "Video", href: "https://video.tecnosocialismo.com" },
+  { mark: "U", label: "Musica", href: "https://musica.tecnosocialismo.com" },
   { mark: "S", label: "Social", href: "https://social.tecnosocialismo.com" },
+  { mark: "G", label: "Messaggi", href: ORIGIN, current: true },
   { mark: "F", label: "Sport", href: "https://sport.tecnosocialismo.com" },
   { mark: "K", label: "Market", href: "https://market.tecnosocialismo.com" },
   { mark: "L", label: "Lavoro", href: "https://lavoro.tecnosocialismo.com" },
   { mark: "Z", label: "Azienda", href: "https://azienda.tecnosocialismo.com" },
   { mark: "E", label: "Servizi", href: "https://servizi.tecnosocialismo.com" },
   { mark: "B", label: "Biblioteca", href: "https://biblioteca.tecnosocialismo.com" },
-  { mark: "G", label: "Messaggi", href: ORIGIN, current: true },
   { mark: "P", label: "Militant", href: "https://militant.tecnosocialismo.com" },
   { mark: "A", label: "Account", href: "https://login.tecnosocialismo.com" },
 ];
@@ -125,7 +126,6 @@ function Messenger({ user }: { user: SuiteUser }) {
           <span className="conversation-meta"><time>{conversation.lastMessage ? shortTime(conversation.lastMessage.createdAt) : ""}</time>{conversation.unreadCount > 0 && <i>{conversation.unreadCount > 99 ? "99+" : conversation.unreadCount}</i>}</span>
         </button>)}
       </div>
-      <div className="panel-suite"><p>ECOSISTEMA</p>{suiteLinks.map((link) => <a className={link.current ? "current" : ""} href={link.href} key={link.label}><i>{link.mark}</i>{link.label}</a>)}</div>
     </aside>
 
     <main className="thread-panel">
